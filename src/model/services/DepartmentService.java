@@ -12,9 +12,6 @@ public class DepartmentService {
 	private DepartmentDao dao = DaoFactory.createDepartmentDao();
 	
 	public List<Department> findAll() {
-
-		//Agora estamos acessando diretamente o banco de dados
-		return dao.findAll();
 		
 /*		//MOCK - trazer os dados de mentirinha
 		List<Department> list = new ArrayList<>();
@@ -22,5 +19,18 @@ public class DepartmentService {
 		list.add(new Department(2, "Computers"));
 		list.add(new Department(3, "Eletronics"));
 		return list; */
+
+		//Agora estamos acessando diretamente o banco de dados
+		return dao.findAll();
+
+	}
+	
+	public void saveOrUpdate(Department obj) {
+		if (obj.getId() == null) {
+			dao.insert(obj);
+		}
+		else {
+			dao.update(obj);
+		}
 	}
 }
